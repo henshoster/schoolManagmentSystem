@@ -44,7 +44,12 @@ foreach ($this_type_info as $key => $value) {
     <?php } else {
         ?>
         <div class="form-group col-8 mx-auto">
+            <?php if ($key == 'description') {?>
+            <textarea id="<?=$key?>" name="<?=$key?>" class="form-control" cols="30" rows="4" required><?=$value?></textarea>
+            <?php } else {?>
             <input id="<?=$key?>" name="<?=$key?>" class="form-control" type="text" value="<?=$value?>"  required>
+            <?php }?>
+
             <label class="form-control-placeholder customclass" for="<?=$key?>"><?=ucfirst($key)?></label>
             <div class="invalid-feedback">
                 Please choose a <?=$key?>.
