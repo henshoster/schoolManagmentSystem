@@ -20,18 +20,69 @@ class SchoolController extends Controller
         $this->model->setMainContainerTpl("mvc/view/templates/school/maincontainer/newentity_tpl.php");
         $this->model->setTypeColumnsNames($_GET['type']);
     }
+
+    public function fileUpload()
+    {
+        $uploadResult = [];
+        $target_dir = "uploads/";
+        $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+        $uploadResult['uploadOk'] = 1;
+        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+        // Check if image file is a actual image or fake image
+        $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+        $error = '';
+        if ($check !== false) {
+            $uploadResult['uploadOk'] = 1;
+        } else {
+            $uploadResult['error'] = "File is not an image.";
+            $uploadResult['uploadOk'] = 0;
+            return $uploadResult;
+        }
+
+        // Check file size
+        if ($_FILES["fileToUpload"]["size"] > 500000 || $_FILES["fileToUpload"]["size"] == 0) {
+            $uploadResult['error'] = "Sorry, your file is too large max size is:500kb.";
+            $uploadResult['uploadOk'] = 0;
+            return $uploadResult;
+        }
+        // Allow certain file formats
+        if ((
+
+            $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+            && $imageFileType != "gif") || $_FILES["fileToUpload"]["type"] == null) {
+            $uploadResult['error'] = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+            $uploadResult['uploadOk'] = 0;
+            return $uploadResult;
+        }
+        // Check if $uploadOk is set to 0 by an error
+        if ($uploadResult['uploadOk'] == 0) {
+            $uploadResult['error'] = "Sorry, your file was not uploaded.";
+            return $uploadResult;
+            // if everything is ok, try to upload file
+        } else {
+            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                $uploadResult['target_file'] = $target_file;
+                return $uploadResult;
+            } else {
+                $uploadResult['error'] = "Sorry, there was an error uploading your file.";
+                $uploadResult['uploadOk'] = 0;
+                return $uploadResult;
+            }
+        }
+    }
     public function save()
     {
-        if ($_FILES["fileToUpload"]["size"] > 0) {
-            require_once 'helpers/file_upload.php';
-            if ($uploadOk == 1) {
-                $_POST['image_src'] = $target_file;
+        if ($_FILES['fileToUpload']["tmp_name"] != null) {
+            $uploadResult = $this->fileUpload();
+            if ($uploadResult['uploadOk'] == 1) {
+                $_POST['image_src'] = $uploadResult['target_file'];
             } else {
-                header('Location:' . str_replace('save', 'edit', "index.php?{$_SERVER['QUERY_STRING']}"));
+                header('Location:' . str_replace('save', $_POST['last_action'], "index.php?{$_SERVER['QUERY_STRING']}&upload_error={$uploadResult['error']}"));
                 die();
             }
         }
 
+        unset($_POST['last_action']);
         $courses = isset($_POST['courses']) ? $_POST['courses'] : null;
         unset($_POST['courses']);
 

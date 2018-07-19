@@ -41,3 +41,21 @@ inputs.forEach(input => {
     false
   );
 })();
+
+var upload = document.querySelector("input[type=file]");
+if (upload != null) {
+  upload.addEventListener("change", function(e) {
+    if (upload.files[0]["size"] > 500000) {
+      document
+        .getElementById("clientSideImageValidation")
+        .classList.remove("d-none");
+      document.getElementById("save_btn").setAttribute("disabled", "true");
+    } else {
+      editDisplayImage.src = URL.createObjectURL(upload.files[0]);
+      document
+        .getElementById("clientSideImageValidation")
+        .classList.add("d-none");
+      document.getElementById("save_btn").removeAttribute("disabled");
+    }
+  });
+}

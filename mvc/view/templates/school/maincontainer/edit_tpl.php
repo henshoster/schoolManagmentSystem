@@ -1,12 +1,13 @@
 
 <div class="my-5 card shadow" id="edit_tpl">
     <form action="<?=str_replace('edit', 'save', "index.php?{$_SERVER['QUERY_STRING']}")?>" class="needs-validation" method="post" novalidate enctype="multipart/form-data">
+    <input type="hidden" name="last_action" value="<?=$_GET['action']?>">
     <div class="row  mx-3 mt-3">
         <div class="col lead">
             Edit <?=ucfirst(substr($this_type_name, 0, -1))?>
         </div>
         <div class="col lead text-right">
-            <button class="btn btn-outline-primary">Save</button>
+            <button id="save_btn" class="btn btn-outline-primary">Save</button>
             <?php if (!($this_type_name == 'courses' && count($connected_type_info) > 0)) {?>
             <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteConfirmationModal">Delete</button>
             <?php }?>
@@ -19,22 +20,26 @@ foreach ($this_type_info as $key => $value) {
     if ($key == 'image_src') {?>
         <div class="row m-3">
             <div class="col-4">
-                <img class="mw-100" src="<?=$value?>">
+                <img id="editDisplayImage" class="mw-100" src="<?=$value?>">
             </div>
             <div class="form-group  col m-auto">
                 <label for="fileToUpload">Change image</label>
                 <input type="file" class="form-control-file" name="fileToUpload" id="fileToUpload">
             </div>
-            <?php
-if (!empty($_SESSION['upload_error'])) {?>
+            <div id="clientSideImageValidation" class="alert alert-warning alert-dismissible fade show my-1 mx-auto d-none" role="alert">
+                    <strong>Warning!</strong><br> Maximum size for upload is 500KB!<br>Please change the image!
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+            </div>
+            <?php if (isset($_GET['upload_error'])) {?>
             <div class="alert alert-warning alert-dismissible fade show m-3" role="alert">
-                <strong>error!</strong> <?=$_SESSION['upload_error']?>
+                <strong>Error: </strong> <?=$_GET['upload_error']?>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <?php $_SESSION['upload_error'] = '';
-    }?>
+            <?php }?>
         </div>
     <?php } else {
         ?>
