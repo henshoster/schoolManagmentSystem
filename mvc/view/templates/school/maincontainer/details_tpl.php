@@ -32,7 +32,7 @@ foreach ($this_type_info as $value) {?>
             </div>
         </div>
     </div>
-
+    <h5 class="mx-3"><u><?=$connected_type_name?>:</u></h5>
     <?php foreach ($connected_type_info as $row) {?>
     <div class="row m-1">
         <div class="col-2">

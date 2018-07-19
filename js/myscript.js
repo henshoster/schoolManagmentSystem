@@ -3,7 +3,7 @@ if (window.location.search.indexOf("loginerror") != -1) {
 }
 
 var inputs = document.querySelectorAll(
-  "input[type=text] ,input[type=email], input[type=password]"
+  "input[type=text] ,input[type=email], input[type=password], textarea"
 );
 inputs.forEach(input => {
   input.addEventListener("change", function(e) {

@@ -13,7 +13,7 @@
                         <td>
                             <a href="index.php?route=school&action=showdetails&type=courses&id=<?=$course['id']?>">
                             <div class="navbar-text align-middle">
-                                <span class="lead"><?=$course['name']?></span>
+                                <span class="lead d-block truncate"><?=$course['name']?></span>
                                 <span class="d-block truncate"><?=$course['description']?></span>
                             </div>
                             <div class="navbar-text align-middle float-right">
