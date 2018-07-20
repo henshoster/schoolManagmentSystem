@@ -6,9 +6,9 @@ class AdminView extends View
     {
         $administrators = $this->model->getAdministrators();
         $main_container_tpl = $this->model->getMainContainerTpl();
-        $selected_admin_info = $this->model->getSelectedAdminInfo();
+        $selected_admin_info = $this->model->getSelectedAdminInfo()[0];
 
         include 'mvc/view/templates/admin/admin_tpl.php';
-        include 'mvc/view/templates/school/maincontainer/delete_confirmation_modal.php';
+        include 'mvc/view/templates/admin/maincontainer/delete_confirmation_modal.php';
     }
 }

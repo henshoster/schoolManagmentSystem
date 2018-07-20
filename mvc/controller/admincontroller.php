@@ -15,21 +15,21 @@ class AdminController extends Controller
     }
     public function newEntityForm()
     {
-        $this->model->setMainContainerTpl("mvc/view/templates/school/maincontainer/newentity_tpl.php");
-        $this->model->setTypeColumnsNames($_GET['type']);
+        $this->model->setMainContainerTpl("mvc/view/templates/admin/maincontainer/newentity_tpl.php");
     }
     public function save()
     {
-        if ($_FILES["fileToUpload"]["size"] > 0) {
-            require_once 'helpers/file_upload.php';
-            if ($uploadOk == 1) {
-                $_POST['image_src'] = $target_file;
+        if ($_FILES['fileToUpload']["tmp_name"] != null) {
+            $uploadResult = $this->fileUpload();
+            if ($uploadResult['uploadOk'] == 1) {
+                $_POST['image_src'] = $uploadResult['target_file'];
             } else {
-                header('Location:' . str_replace('save', 'edit', "index.php?{$_SERVER['QUERY_STRING']}"));
+                header('Location:' . str_replace('save', $_POST['last_action'], "index.php?{$_SERVER['QUERY_STRING']}&upload_error={$uploadResult['error']}"));
                 die();
             }
         }
 
+        unset($_POST['last_action']);
         $courses = isset($_POST['courses']) ? $_POST['courses'] : null;
         unset($_POST['courses']);
 
@@ -59,18 +59,13 @@ class AdminController extends Controller
             }
 
         }
-
-        header('Location:' . str_replace('save', 'showdetails', "index.php?{$_SERVER['QUERY_STRING']}" . (isset($_GET['id']) ? "" : "&id={$id}")));
+        header('Location:index.php?route=admin');
         die();
     }
     public function edit()
     {
-        $this->model->setMainContainerTpl("mvc/view/templates/school/maincontainer/edit_tpl.php");
-        $this->model->setMainContainerInfo($_GET['type'], $_GET['id']);
+        $this->model->setMainContainerTpl("mvc/view/templates/admin/maincontainer/edit_tpl.php");
+        $this->model->setMainContainerInfo($_GET['id']);
     }
-    public function showDetails()
-    {
-        $this->model->setMainContainerTpl("mvc/view/templates/school/maincontainer/details_tpl.php");
-        $this->model->setMainContainerInfo($_GET['type'], $_GET['id']);
-    }
+
 }

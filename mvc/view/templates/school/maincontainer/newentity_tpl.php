@@ -44,7 +44,7 @@ foreach ($type_columns_names as $value) {
             <?php if ($value == 'description') {?>
             <textarea id="<?=$value?>" name="<?=$value?>" class="form-control" cols="30" rows="4" required></textarea>
             <?php } else {?>
-            <input id="<?=$value?>" name="<?=$value?>" class="form-control" type="text" required>
+            <input id="<?=$value?>" name="<?=$value?>" class="form-control" type="<?=$value != 'email' ? 'text' : $value?>" required>
             <?php }?>
             <label class="form-control-placeholder" for="<?=$value?>"><?=ucfirst($value)?></label>
             <div class="invalid-feedback">

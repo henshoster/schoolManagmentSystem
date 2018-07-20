@@ -47,7 +47,7 @@ foreach ($this_type_info as $key => $value) {
             <?php if ($key == 'description') {?>
             <textarea id="<?=$key?>" name="<?=$key?>" class="form-control" cols="30" rows="4" required><?=$value?></textarea>
             <?php } else {?>
-            <input id="<?=$key?>" name="<?=$key?>" class="form-control" type="text" value="<?=$value?>"  required>
+            <input id="<?=$key?>" name="<?=$key?>" class="form-control" type="<?=$key != 'email' ? 'text' : $key?>" value="<?=$value?>" value="<?=$value?>"  required>
             <?php }?>
 
             <label class="form-control-placeholder customclass" for="<?=$key?>"><?=ucfirst($key)?></label>

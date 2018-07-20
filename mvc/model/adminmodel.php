@@ -37,24 +37,10 @@ class AdminModel extends Model
         $this->main_container_tpl = $main_container_tpl;
     }
 
-    public function setMainContainerInfo($type, $id)
+    public function setMainContainerInfo($id)
     {
-        $this->this_type_name = $type;
-        $this->connected_type_name = str_replace('2', '', str_replace($type, '', self::DB_S2C));
-        $this->this_type_info = $this->select($type, '*', "id='$id'");
-        $this->connected_type_info = $this->queryTreatment(
-            "SELECT id,name,image_src
-            FROM students2courses
-            LEFT JOIN $this->connected_type_name
-            ON students2courses.{$this->connected_type_name}_id = {$this->connected_type_name}.id
-            WHERE {$type}_id='$id'");
-        $temp_arr = [];
-        foreach ($this->connected_type_info as $key => $value) {
-            $temp_arr[$value['id']] = $value;
-        }
-        $this->connected_type_info = $temp_arr;
-        $this->courses = $this->select(self::DB_COURSES);
-        $this->students = $this->select(self::DB_STUDENTS);
+
+        $this->selected_admin_info = $this->select(self::DB_ADMINISTRATORS, '*', "id='$id'");
     }
 
 }
