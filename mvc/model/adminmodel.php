@@ -15,7 +15,12 @@ class AdminModel extends Model
             header('Location:index.php');
             die();
         }
-        $this->administrators = $this->select(self::DB_ADMINISTRATORS);
+        if ($this->classification < 3) {
+            $this->administrators = $this->select(self::DB_ADMINISTRATORS, '*', "role NOT LIKE 'owner'");
+        } else {
+            $this->administrators = $this->select(self::DB_ADMINISTRATORS);
+        }
+
         $this->main_container_tpl = 'mvc/view/templates/admin/maincontainer/default_tpl.php';
         $this->selected_admin_info = null;
     }
@@ -39,8 +44,12 @@ class AdminModel extends Model
 
     public function setMainContainerInfo($id)
     {
-
-        $this->selected_admin_info = $this->select(self::DB_ADMINISTRATORS, '*', "id='$id'");
+        foreach ($this->administrators as $admin) {
+            if ($admin['id'] == $id) {
+                $this->selected_admin_info = $admin;
+                break;
+            }
+        }
     }
 
 }
