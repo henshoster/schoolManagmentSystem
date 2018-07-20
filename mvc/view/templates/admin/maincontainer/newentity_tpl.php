@@ -39,8 +39,19 @@ foreach ($administrators[0] as $key => $value) {
             </div>
             <?php }?>
         </div>
-    <?php } else {
-        ?>
+        <?php } elseif ($key == 'role') {?>
+        <div class="form-group col-8 mx-auto">
+            <select class="custom-select" name='<?=$key?>' id='<?=$key?>' required>
+                <option selected disabled value=""></option>
+                <option value="sales">Sales</option>
+                <option value="manager">Manager</option>
+            </select>
+            <label class="form-control-placeholder" for="<?=$key?>"><?=ucfirst($key)?></label>
+            <div class="invalid-feedback">
+                Please choose a <?=$key?>.
+            </div>
+        </div>
+        <?php } else {?>
         <div class="form-group col-8 mx-auto">
             <?php if ($key == 'description') {?>
             <textarea id="<?=$key?>" name="<?=$key?>" class="form-control" cols="30" rows="4" required></textarea>

@@ -8,8 +8,9 @@
         </div>
         <div class="col lead text-right">
             <button id="save_btn" class="btn btn-outline-primary">Save</button>
-
-            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteConfirmationModal">Delete</button>
+            <?php if ($selected_admin_info['role'] != 'owner') {?>
+                <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteConfirmationModal">Delete</button>
+            <?php }?>
 
         </div>
     </div>
@@ -41,13 +42,31 @@ foreach ($selected_admin_info as $key => $value) {
             </div>
             <?php }?>
         </div>
-    <?php } else {
-        ?>
+        <?php } elseif ($key == 'role') {?>
         <div class="form-group col-8 mx-auto">
-
-            <input id="<?=$key?>" name="<?=$key?>" class="form-control" type="<?=($key != 'email' && $key != 'password') ? 'text' : $key?>" value="<?=$value?>"  required>
-
+            <select class="custom-select" name='<?=$key?>' id='<?=$key?>' required>
+                <?php if ($value == 'owner') {?>
+                <option value="owner" selected disabled>Owner (Cannot be modified)</option>
+                <?php } else {?>
+                <option value="sales" <?=$value == 'sales' ? 'selected' : ''?>>Sales</option>
+                <option value="manager" <?=$value == 'manager' ? 'selected' : ''?>>Manager</option>
+                <?php }?>
+            </select>
             <label class="form-control-placeholder customclass" for="<?=$key?>"><?=ucfirst($key)?></label>
+            <div class="invalid-feedback">
+                Please choose a <?=$key?>.
+            </div>
+        </div>
+        <?php } else {?>
+        <div class="form-group col-8 mx-auto">
+            <?php if ($key != 'password') {?>
+                <input id="<?=$key?>" name="<?=$key?>" class="form-control" type="<?=$key != 'email' ? 'text' : $key?>" value="<?=$value?>"  required>
+                <label class="form-control-placeholder customclass" for="<?=$key?>"><?=ucfirst($key)?></label>
+            <?php } else {?>
+                <input id="<?=$key?>" name="<?=$key?>" class="form-control" type="password">
+                <label class="form-control-placeholder" for="<?=$key?>">Change Password (Optional)</label>
+            <?php }?>
+
             <div class="invalid-feedback">
                 Please choose a <?=$key?>.
             </div>

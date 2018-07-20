@@ -18,7 +18,7 @@ class SchoolModel extends Model
     public function __construct()
     {
         parent::__construct();
-        if ($this->classification == 0) {
+        if ($this->classification < 1) {
             header('Location:index.php');
             die();
         }

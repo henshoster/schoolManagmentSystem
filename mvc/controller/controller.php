@@ -21,12 +21,14 @@ class Controller
             header("Location:index.php");
             die();
         }
-        if ($this->model->select(self::DB_TABLE, 'password', "name = '{$_POST['user_name_login']}'")[0]['password'] == $_POST['password_login']) {
-            $_SESSION['loggedInUser'] = $this->model->select(self::DB_TABLE, '*', "name = '{$_POST['user_name_login']}'");
+
+        $hash = $this->model->select(self::DB_TABLE, 'password', "email = '{$_POST['user_email_login']}'")[0]['password'];
+        if (password_verify($_POST['password_login'], $hash)) {
+            $_SESSION['loggedInUser'] = $this->model->select(self::DB_TABLE, '*', "email = '{$_POST['user_email_login']}'");
             header("Location:index.php?route=school");
             die();
         } else {
-            $error = 'User name or Password incorrect or not exist';
+            $error = 'Email or Password incorrect or do not exist';
             header("Location:index.php?loginerror={$error}");
             die();
         }

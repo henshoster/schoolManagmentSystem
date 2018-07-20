@@ -10,7 +10,7 @@ class AdminController extends Controller
         if ($_GET['type'] == 'students') {
             $this->model->delete(self::DB_S2C, "students_id='{$_GET['id']}'");
         }
-        header('Location:index.php?route=school');
+        header('Location:index.php?route=admin');
         die();
     }
     public function newEntityForm()
@@ -32,12 +32,15 @@ class AdminController extends Controller
         unset($_POST['last_action']);
         $courses = isset($_POST['courses']) ? $_POST['courses'] : null;
         unset($_POST['courses']);
+        if ($_POST['password'] == null) {
+            unset($_POST['password']);
+        }
 
         $columns = [];
         $values = [];
         foreach ($_POST as $key => $value) {
             array_push($columns, $key);
-            array_push($values, $value);
+            array_push($values, $key == 'password' ? password_hash($value, PASSWORD_DEFAULT) : $value);
         }
         if (isset($_GET['id'])) {
             $this->model->update($_GET['type'], $columns, $values, "id='{$_GET['id']}'");

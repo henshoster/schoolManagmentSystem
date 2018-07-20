@@ -25,8 +25,8 @@ if (!empty($_GET['loginerror'])) {
             <div class="row pt-1">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <input id="user_name_login" name="user_name_login" class="form-control" type="text" required>
-                        <label class="form-control-placeholder" for="user_name_login">User name</label>
+                        <input id="user_email_login" name="user_email_login" class="form-control" type="email" required>
+                        <label class="form-control-placeholder" for="user_email_login">Email</label>
                     </div>
                 </div>
                 <div class="col-md-6">
