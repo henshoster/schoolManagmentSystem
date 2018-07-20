@@ -4,7 +4,7 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">Administrators <a href="index.php?route=admin&action=newentityform"><img src="images/plus.png"  class="float-right"></a></th>
+                        <th scope="col">Administrators <a href="index.php?route=admin&action=newentityform&type=administrators"><img src="images/plus.png"  class="float-right"></a></th>
                     </tr>
                 </thead>
                 <tbody>

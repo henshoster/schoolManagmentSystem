@@ -4,11 +4,13 @@ class Model extends DataBase
 {
     protected $loggedInUser;
     protected $classification;
+    const DB_TABLE = 'administrators';
+
     public function __construct()
     {
         parent::__construct();
         if (isset($_SESSION['loggedInUser'])) {
-            $this->loggedInUser = $_SESSION['loggedInUser'][0];
+            $this->loggedInUser = $this->select(self::DB_TABLE, '*', "id = '{$_SESSION['loggedInUser'][0]['id']}'")[0];
             switch ($this->loggedInUser['role']) {
                 case 'owner':
                     $this->classification = 3;

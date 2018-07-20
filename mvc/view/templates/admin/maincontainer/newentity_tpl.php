@@ -12,12 +12,13 @@
     </div>
     <div class="dropdown-divider mb-4"></div>
     <?php
-foreach ($type_columns_names as $value) {
-    if ($value == 'image_src') {?>
+unset($administrators[0]['id']);
+foreach ($administrators[0] as $key => $value) {
+    if ($key == 'image_src') {?>
         <div class="row m-3">
             <div class="col-4">
-                <img id="editDisplayImage" class="mw-100" src="<?=$_GET['type'] == 'students' ? 'images/user.png' : 'images/course.png'?>">
-                <input type="hidden" name="<?=$value?>" value="<?=$_GET['type'] == 'students' ? 'images/user.png' : 'images/course.png'?>">
+                <img id="editDisplayImage" class="mw-100" src='images/user.png'>
+                <input type="hidden" name="<?=$key?>" value='images/user.png'>
             </div>
             <div class="form-group  col m-auto">
                 <label for="fileToUpload">Change image</label>
@@ -41,36 +42,16 @@ foreach ($type_columns_names as $value) {
     <?php } else {
         ?>
         <div class="form-group col-8 mx-auto">
-            <?php if ($value == 'description') {?>
-            <textarea id="<?=$value?>" name="<?=$value?>" class="form-control" cols="30" rows="4" required></textarea>
+            <?php if ($key == 'description') {?>
+            <textarea id="<?=$key?>" name="<?=$key?>" class="form-control" cols="30" rows="4" required></textarea>
             <?php } else {?>
-            <input id="<?=$value?>" name="<?=$value?>" class="form-control" type="text" required>
+            <input id="<?=$key?>" name="<?=$key?>" class="form-control" type="<?=($key != 'email' && $key != 'password') ? 'text' : $key?>" required>
             <?php }?>
-            <label class="form-control-placeholder" for="<?=$value?>"><?=ucfirst($value)?></label>
+            <label class="form-control-placeholder" for="<?=$key?>"><?=ucfirst($key)?></label>
             <div class="invalid-feedback">
-                Please choose a <?=$value?>.
+                Please choose a <?=$key?>.
             </div>
         </div>
 <?php }}?>
-        <div class="row m-2">
-            <?php if ($_GET['type'] == 'students') {?>
-            <div class="col-3 text-right lead">
-                Courses:
-            </div>
-            <div class="col">
-            <div class="row m-1">
-    <?php $i = 0;foreach ($courses as $row) {
-    if ($i % 2 == 0 && $i != 0) {?>
-            </div>
-            <div class="row m-1">
-         <?php }?>
-            <div class="custom-control custom-checkbox col-4">
-                <input type="checkbox" class="custom-control-input" name="courses[]" id="<?=$row['id']?>" value="<?=$row['id']?>">
-                <label class="custom-control-label" for="<?=$row['id']?>"><?=$row['name']?></label>
-            </div>
-   <?php $i++;}?>
-            </div>
-            <?php }?>
-        </div>
     </form>
 </div>
