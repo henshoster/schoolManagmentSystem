@@ -4,9 +4,11 @@
         <div class="col lead">
             <?=ucfirst(substr($this_type_name, 0, -1))?>
         </div>
-        <div class="col lead text-right">
+        <?php if (!($this->model->getClassification() < 2) || ($_GET['type'] != 'courses')) {?>
+            <div class="col lead text-right">
             <a href="<?=str_replace('showdetails', 'edit', "index.php?{$_SERVER['QUERY_STRING']}")?>" class="btn btn-outline-primary">Edit</a>
         </div>
+        <?php }?>
     </div>
     <div class="dropdown-divider"></div>
     <div class="row m-3">

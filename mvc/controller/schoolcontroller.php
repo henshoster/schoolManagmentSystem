@@ -17,6 +17,10 @@ class SchoolController extends Controller
     }
     public function newEntityForm()
     {
+        if ($_GET['type'] == 'courses' && $this->model->getClassification() < 2) {
+            header('Location:index.php?route=school');
+            die();
+        }
         $this->model->setMainContainerTpl("mvc/view/templates/school/maincontainer/newentity_tpl.php");
         $this->model->setTypeColumnsNames($_GET['type']);
     }
@@ -69,6 +73,10 @@ class SchoolController extends Controller
     }
     public function edit()
     {
+        if ($_GET['type'] == 'courses' && $this->model->getClassification() < 2) {
+            header('Location:index.php?route=school');
+            die();
+        }
         $this->model->setMainContainerTpl("mvc/view/templates/school/maincontainer/edit_tpl.php");
         $this->model->setMainContainerInfo($_GET['type'], $_GET['id']);
     }
