@@ -1,6 +1,6 @@
 
 <div class="my-5 card shadow" id="edit_tpl">
-    <form action="<?=str_replace('edit', 'save', "index.php?{$_SERVER['QUERY_STRING']}")?>" class="needs-validation" method="post" novalidate enctype="multipart/form-data">
+    <form action="<?=str_replace('editentity', 'save', "index.php?{$_SERVER['QUERY_STRING']}")?>" class="needs-validation" method="post" novalidate enctype="multipart/form-data">
     <input type="hidden" name="last_action" value="<?=$_GET['action']?>">
     <div class="row  mx-3 mt-3">
         <div class="col lead">

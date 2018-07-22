@@ -12,7 +12,7 @@
                 <?php foreach ($administrators as $admin) {?>
                     <tr>
                         <td>
-                            <a href="index.php?route=admin&action=edit&type=administrators&id=<?=$admin['id']?>">
+                            <a href="index.php?route=admin&action=editentity&type=administrators&id=<?=$admin['id']?>">
                             <div class="d-inline-block align-middle">
                                 <span class="lead"><?=$admin['name']?>, <?=ucfirst($admin['role'])?></span>
                                 <small class="d-block text-muted"><?=$admin['phone']?></small>

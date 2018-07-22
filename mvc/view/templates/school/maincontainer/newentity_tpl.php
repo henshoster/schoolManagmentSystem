@@ -64,7 +64,7 @@ foreach ($type_columns_names as $value) {
             </div>
             <div class="row m-1">
          <?php }?>
-            <div class="custom-control custom-checkbox col-4">
+            <div class="custom-control custom-checkbox col-6">
                 <input type="checkbox" class="custom-control-input" name="courses[]" id="<?=$row['id']?>" value="<?=$row['id']?>">
                 <label class="custom-control-label" for="<?=$row['id']?>"><?=$row['name']?></label>
             </div>

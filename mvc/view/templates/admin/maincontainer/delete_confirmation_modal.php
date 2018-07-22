@@ -13,7 +13,7 @@
       </div>
       <div class="modal-footer">
                 <button type="button" class="btn btn-outline-primary" data-dismiss="modal">No</button>
-                <a href="<?=str_replace('edit', 'deleteentity', "index.php?{$_SERVER['QUERY_STRING']}")?>" class="btn btn-outline-danger">Yes - Delete!</a>
+                <a href="<?=str_replace('editentity', 'deleteentity', "index.php?{$_SERVER['QUERY_STRING']}")?>" class="btn btn-outline-danger">Yes - Delete!</a>
     </div>
   </div>
 </div>
