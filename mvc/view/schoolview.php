@@ -7,7 +7,7 @@ class SchoolView extends View
         $courses = $this->model->getCourses();
         $students = $this->model->getStudents();
         $main_container_tpl = $this->model->getMainContainerTpl();
-        $this_type_info = $this->model->getMainContainerTypeInfo()[0];
+        $this_type_info = $this->model->getSelectedEntityInfo();
         $connected_type_info = $this->model->getMainContainerConnectedTypeInfo();
         $this_type_name = $this->model->getThisTypeName();
         $connected_type_name = $this->model->getConnectedTypeName();

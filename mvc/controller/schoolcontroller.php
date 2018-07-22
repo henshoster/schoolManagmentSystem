@@ -8,12 +8,10 @@ class SchoolController extends Controller
 
     public function deleteEntity()
     {
-        $this->model->delete($_GET['type'], "id='{$_GET['id']}'");
         if ($_GET['type'] == 'students') {
             $this->model->delete(self::DB_S2C, "students_id='{$_GET['id']}'");
         }
-        header('Location:index.php?route=school');
-        die();
+        parent::deleteEntity();
     }
     public function newEntityForm()
     {
@@ -21,40 +19,15 @@ class SchoolController extends Controller
             header('Location:index.php?route=school');
             die();
         }
-        $this->model->setMainContainerTpl("mvc/view/templates/school/maincontainer/newentity_tpl.php");
         $this->model->setTypeColumnsNames($_GET['type']);
+        parent::newEntityForm();
     }
 
     public function save()
     {
-        if ($_FILES['fileToUpload']["tmp_name"] != null) {
-            $uploadResult = $this->fileUpload();
-            if ($uploadResult['uploadOk'] == 1) {
-                $_POST['image_src'] = $uploadResult['target_file'];
-            } else {
-                header('Location:' . str_replace('save', $_POST['last_action'], "index.php?{$_SERVER['QUERY_STRING']}&upload_error={$uploadResult['error']}"));
-                die();
-            }
-        }
-
-        unset($_POST['last_action']);
         $courses = isset($_POST['courses']) ? $_POST['courses'] : null;
         unset($_POST['courses']);
-
-        $columns = [];
-        $values = [];
-        foreach ($_POST as $key => $value) {
-            array_push($columns, $key);
-            array_push($values, $value);
-        }
-        if (isset($_GET['id'])) {
-            $this->model->update($_GET['type'], $columns, $values, "id='{$_GET['id']}'");
-            $id = $_GET['id'];
-        } else {
-            $this->model->insert($_GET['type'], $columns, $values);
-            $id = $this->model->getLastId();
-        }
-
+        $id = parent::saveEntity();
         if ($_GET['type'] == 'students') {
             $this->model->delete(self::DB_S2C, "students_id='$id'");
             $columns = ['students_id', 'courses_id'];
@@ -65,24 +38,23 @@ class SchoolController extends Controller
                 $this->model->insert(self::DB_S2C, $columns, $values);
                 $values = [];
             }
-
         }
 
         header('Location:' . str_replace('save', 'showdetails', "index.php?{$_SERVER['QUERY_STRING']}" . (isset($_GET['id']) ? "" : "&id={$id}")));
         die();
     }
-    public function edit()
+    public function editEntity()
     {
+        //Prevents from admin type of 'Sales' to edit courses if he will try to do it by url.
         if ($_GET['type'] == 'courses' && $this->model->getClassification() < 2) {
             header('Location:index.php?route=school');
             die();
         }
-        $this->model->setMainContainerTpl("mvc/view/templates/school/maincontainer/edit_tpl.php");
-        $this->model->setMainContainerInfo($_GET['type'], $_GET['id']);
+        parent::editEntity();
     }
     public function showDetails()
     {
         $this->model->setMainContainerTpl("mvc/view/templates/school/maincontainer/details_tpl.php");
-        $this->model->setMainContainerInfo($_GET['type'], $_GET['id']);
+        $this->model->setSelectedEntityInfo($_GET['type'], $_GET['id']);
     }
 }

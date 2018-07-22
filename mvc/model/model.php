@@ -4,6 +4,10 @@ class Model extends DataBase
 {
     protected $loggedInUser;
     protected $classification;
+
+    protected $main_container_tpl;
+    protected $selected_entity_info;
+
     const DB_TABLE = 'administrators';
 
     public function __construct()
@@ -22,10 +26,13 @@ class Model extends DataBase
                     $this->classification = 1;
                     break;
             }
-
+            $this->main_container_tpl = 'mvc/view/templates/' . str_replace('model', '', strtolower(get_class($this))) . '/maincontainer/default_tpl.php';
+            $this->selected_entity_info = null;
         } else {
             $this->loggedInUser = null;
             $this->classification = 0;
+            $this->main_container_tpl = null;
+            $this->selected_entity_info = null;
         }
     }
     public function getLoggedInUser()
@@ -36,4 +43,27 @@ class Model extends DataBase
     {
         return $this->classification;
     }
+    public function getMainContainerTpl()
+    {
+        return $this->main_container_tpl;
+    }
+    public function getSelectedEntityInfo()
+    {
+        return $this->selected_entity_info;
+    }
+
+    public function setMainContainerTpl($main_container_tpl)
+    {
+        $this->main_container_tpl = $main_container_tpl;
+    }
+    public function setSelectedEntityInfo($type, $id)
+    {
+        foreach ($this->{$type} as $entity) {
+            if ($entity['id'] == $id) {
+                $this->selected_entity_info = $entity;
+                break;
+            }
+        }
+    }
+
 }

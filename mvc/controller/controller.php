@@ -21,7 +21,6 @@ class Controller
             header("Location:index.php");
             die();
         }
-
         $hash = $this->model->select(self::DB_TABLE, 'password', "email = '{$_POST['user_email_login']}'")[0]['password'];
         if (password_verify($_POST['password_login'], $hash)) {
             $_SESSION['loggedInUser'] = $this->model->select(self::DB_TABLE, '*', "email = '{$_POST['user_email_login']}'");
@@ -33,6 +32,7 @@ class Controller
             die();
         }
     }
+
     public function logOut()
     {
         unset($_COOKIE['PHPSESSID']);
@@ -41,6 +41,54 @@ class Controller
         header("Location:index.php");
         die();
     }
+
+    public function saveEntity()
+    {
+        if ($_FILES['fileToUpload']["tmp_name"] != null) {
+            $uploadResult = $this->fileUpload();
+            if ($uploadResult['uploadOk'] == 1) {
+                $_POST['image_src'] = $uploadResult['target_file'];
+            } else {
+                header('Location:' . str_replace('save', $_POST['last_action'], "index.php?{$_SERVER['QUERY_STRING']}&upload_error={$uploadResult['error']}"));
+                die();
+            }
+        }
+        unset($_POST['last_action']);
+
+        $columns = [];
+        $values = [];
+        foreach ($_POST as $key => $value) {
+            array_push($columns, $key);
+            array_push($values, $key == 'password' ? password_hash($value, PASSWORD_DEFAULT) : $value);
+        }
+        if (isset($_GET['id'])) {
+            $this->model->update($_GET['type'], $columns, $values, "id='{$_GET['id']}'");
+            $id = $_GET['id'];
+        } else {
+            $this->model->insert($_GET['type'], $columns, $values);
+            $id = $this->model->getLastId();
+        }
+        return $id;
+    }
+
+    public function editEntity()
+    {
+        $this->model->setMainContainerTpl('mvc/view/templates/' . str_replace('controller', '', strtolower(get_class($this))) . '/maincontainer/edit_tpl.php');
+        $this->model->setSelectedEntityInfo($_GET['type'], $_GET['id']);
+    }
+
+    public function newEntityForm()
+    {
+        $this->model->setMainContainerTpl('mvc/view/templates/' . str_replace('controller', '', strtolower(get_class($this))) . '/maincontainer/newentity_tpl.php');
+    }
+
+    public function deleteEntity()
+    {
+        $this->model->delete($_GET['type'], "id='{$_GET['id']}'");
+        header('Location:index.php?route=' . str_replace('controller', '', strtolower(get_class($this))));
+        die();
+    }
+
     public function fileUpload()
     {
         $uploadResult = [];
