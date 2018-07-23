@@ -114,9 +114,7 @@ class Controller
             return $uploadResult;
         }
         // Allow certain file formats
-        if ((
-
-            $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+        if (($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
             && $imageFileType != "gif") || $_FILES["fileToUpload"]["type"] == null) {
             $uploadResult['error'] = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
             $uploadResult['uploadOk'] = 0;

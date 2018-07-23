@@ -6,6 +6,7 @@ class View
 
     protected $main_container_tpl;
     protected $selected_entity_info;
+    protected $directoryStucture;
 
     public function __construct(Model $model, $route = null)
     {
@@ -27,7 +28,12 @@ class View
             include 'mvc/view/templates/' . str_replace('view', '', strtolower(get_class($this))) . '/' . str_replace('view', '', strtolower(get_class($this))) . '_tpl.php';
             include 'mvc/view/templates/modals/delete_confirmation_modal.php';
         } else {
-            include 'mvc/view/templates/default_main_page.php';
+            $this->directoryStucture = $this->model->getDirectoryStructure();
+            include 'mvc/view/templates/main_page/default_main_page_tpl.php';
         }
+    }
+    public function treePrint($dirtree, $uniqueCounter)
+    {
+        include 'mvc/view/templates/main_page/file_structure_tpl.php';
     }
 }
