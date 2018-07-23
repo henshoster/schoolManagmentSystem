@@ -12,7 +12,7 @@
     </div>
     <div class="dropdown-divider mb-4"></div>
     <?php
-foreach ($type_columns_names as $value) {
+foreach ($this->type_columns_names as $value) {
     if ($value == 'image_src') {?>
         <div class="row m-3">
             <div class="col-4">
@@ -59,7 +59,7 @@ foreach ($type_columns_names as $value) {
             </div>
             <div class="col">
             <div class="row m-1">
-    <?php $i = 0;foreach ($courses as $row) {
+    <?php $i = 0;foreach ($this->courses as $row) {
     if ($i % 2 == 0 && $i != 0) {?>
             </div>
             <div class="row m-1">

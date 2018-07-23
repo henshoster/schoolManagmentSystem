@@ -4,11 +4,11 @@
     <input type="hidden" name="last_action" value="<?=$_GET['action']?>">
     <div class="row  mx-3 mt-3">
         <div class="col lead">
-            Edit <strong><?=ucfirst($selected_admin_info['name'])?> (<?=ucfirst($selected_admin_info['role'])?>)</strong>
+            Edit <strong><?=ucfirst($this->selected_entity_info['name'])?> (<?=ucfirst($this->selected_entity_info['role'])?>)</strong>
         </div>
         <div class="col lead text-right">
             <button id="save_btn" class="btn btn-outline-primary">Save</button>
-            <?php if (($selected_admin_info['role'] != 'owner') && ($selected_admin_info['email'] != $this->model->getLoggedInUser()['email'])) {?>
+            <?php if (($this->selected_entity_info['role'] != 'owner') && ($this->selected_entity_info['email'] != $this->model->getLoggedInUser()['email'])) {?>
                 <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteConfirmationModal">Delete</button>
             <?php }?>
 
@@ -16,8 +16,8 @@
     </div>
     <div class="dropdown-divider mb-4"></div>
     <?php
-unset($selected_admin_info['id']);
-foreach ($selected_admin_info as $key => $value) {
+unset($this->selected_entity_info['id']);
+foreach ($this->selected_entity_info as $key => $value) {
     if ($key == 'image_src') {?>
         <div class="row m-3">
             <div class="col-4">
@@ -45,7 +45,7 @@ foreach ($selected_admin_info as $key => $value) {
         <?php } elseif ($key == 'role') {?>
         <div class="form-group col-8 mx-auto">
             <select class="custom-select" name='<?=$key?>' id='<?=$key?>' required>
-                <?php if (($value == 'owner') || ($selected_admin_info['email'] == $this->model->getLoggedInUser()['email'])) {?>
+                <?php if (($value == 'owner') || ($this->selected_entity_info['email'] == $this->model->getLoggedInUser()['email'])) {?>
                 <option value="<?=$value?>" selected disabled><?=ucfirst($value)?> (Cannot be modified)</option>
                 <?php } else {?>
                 <option value="sales" <?=$value == 'sales' ? 'selected' : ''?>>Sales</option>

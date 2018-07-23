@@ -8,7 +8,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($courses as $course) {?>
+                <?php foreach ($this->courses as $course) {?>
                     <tr>
                         <td>
                             <a href="index.php?route=school&action=showdetails&type=courses&id=<?=$course['id']?>">
@@ -34,7 +34,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($students as $student) {?>
+                    <?php foreach ($this->students as $student) {?>
                     <tr>
                         <td>
                             <a href="index.php?route=school&action=showdetails&type=students&id=<?=$student['id']?>">
@@ -53,7 +53,7 @@
             </table>
         </div>
         <div class="col-lg-6 align-top mx-auto">
-            <?php include $main_container_tpl?>
+            <?php include $this->main_container_tpl?>
         </div>
     </div>
 </div>

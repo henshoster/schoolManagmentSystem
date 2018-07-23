@@ -2,12 +2,11 @@
 require_once 'mvc/view/view.php';
 class AdminView extends View
 {
+    protected $administrators;
+
     public function output()
     {
-        $administrators = $this->model->getAdministrators();
-        $main_container_tpl = $this->model->getMainContainerTpl();
-        $selected_admin_info = $this->model->getSelectedEntityInfo();
-        include 'mvc/view/templates/admin/admin_tpl.php';
-        include 'mvc/view/templates/admin/maincontainer/delete_confirmation_modal.php';
+        $this->administrators = $this->model->getAdministrators();
+        parent::output();
     }
 }

@@ -9,7 +9,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($administrators as $admin) {?>
+                <?php foreach ($this->administrators as $admin) {?>
                     <tr>
                         <td>
                             <a href="index.php?route=admin&action=editentity&type=administrators&id=<?=$admin['id']?>">
@@ -29,7 +29,7 @@
             </table>
         </div>
         <div class="col-lg-8 align-top mx-auto">
-            <?php include $main_container_tpl?>
+            <?php include $this->main_container_tpl?>
         </div>
     </div>
 </div>

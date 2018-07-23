@@ -12,8 +12,8 @@
     </div>
     <div class="dropdown-divider mb-4"></div>
     <?php
-unset($administrators[0]['id']);
-foreach ($administrators[0] as $key => $value) {
+unset($this->administrators[0]['id']);
+foreach ($this->administrators[0] as $key => $value) {
     if ($key == 'image_src') {?>
         <div class="row m-3">
             <div class="col-4">

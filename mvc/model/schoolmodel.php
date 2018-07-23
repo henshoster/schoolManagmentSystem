@@ -9,7 +9,6 @@ class SchoolModel extends Model
     protected $courses;
     protected $students;
 
-    protected $this_type_info;
     protected $connected_type_info;
     protected $this_type_name;
     protected $connected_type_name;

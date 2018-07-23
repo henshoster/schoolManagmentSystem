@@ -9,7 +9,7 @@
         </button>
       </div>
       <div class="modal-body">
-          Are you sure you want to delete this <?=ucfirst($selected_admin_info['role']);?> : <span class="font-weight-bold"><?=$selected_admin_info['name']?></span>?
+          Are you sure you want to delete this <?=ucfirst($this->selected_entity_info['role']);?> : <span class="font-weight-bold"><?=$this->selected_entity_info['name']?></span>?
       </div>
       <div class="modal-footer">
                 <button type="button" class="btn btn-outline-primary" data-dismiss="modal">No</button>
