@@ -4,8 +4,24 @@ abstract class DataBase
     protected $db;
     public function __construct($host = "localhost", $username = "root", $password = "", $databasename = "project")
     {
-        $this->db = new mysqli($host, $username, $password, $databasename);
+        $this->db = new mysqli($host, $username, $password);
+        //if not exists, creating new database for The school under the name 'project';
+        if ($this->db->select_db($databasename) === false) {
+            $this->queryTreatment("CREATE DATABASE IF NOT EXISTS $databasename CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci");
+            $this->db->select_db($databasename);
+            $this->queryTreatment("CREATE TABLE IF NOT EXISTS `administrators` ( `id` INT NOT NULL AUTO_INCREMENT , `name` VARCHAR(50) NOT NULL , `role` VARCHAR(20) NOT NULL , `phone` VARCHAR(20) NOT NULL , `email` VARCHAR(50) NOT NULL , `password` VARCHAR(255) NOT NULL , `image_src` TEXT NOT NULL , PRIMARY KEY (`id`), UNIQUE (`email`)) ENGINE = InnoDB");
+            $ownerPassword = password_hash('admin', PASSWORD_DEFAULT);
+            $ownerColumns = ['id', 'name', 'role', 'phone', 'email', 'password', 'image_src'];
+            $ownerValues = [null, 'admin', 'owner', '050-0000000', 'admin@theschool.com', "$ownerPassword", 'images/user.png'];
+            $this->insert('administrators', $ownerColumns, $ownerValues);
+            $this->queryTreatment("CREATE TABLE IF NOT EXISTS `courses` ( `id` INT NOT NULL AUTO_INCREMENT , `name` VARCHAR(50) NOT NULL , `description` TEXT NOT NULL , `image_src` TEXT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB");
+            $this->queryTreatment("CREATE TABLE IF NOT EXISTS `students` ( `id` INT NOT NULL AUTO_INCREMENT , `name` VARCHAR(50) NOT NULL , `phone` VARCHAR(20) NOT NULL , `email` VARCHAR(50) NOT NULL , `image_src` TEXT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB");
+            $this->queryTreatment("CREATE TABLE `students2courses` ( `students_id` INT NOT NULL , `courses_id` INT NOT NULL ) ENGINE = InnoDB");
+            $this->queryTreatment("ALTER TABLE `students2courses` ADD UNIQUE (`students_id`, `courses_id`)");
+        }
         if ($this->db->connect_error) {
+            echo "<pre>";
+            var_dump($this->db);
             die("Connection failed: " . $this->db->connect_error);
         }
     }
