@@ -4,7 +4,11 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">Courses <a href="index.php?route=school&action=newentityform&type=courses"><img src="images/plus.png"  class="float-right"></a></th>
+                        <th scope="col">Courses
+                            <?php if ($this->model->getClassification() > 1) {?>
+                                <a href="index.php?route=school&action=newentityform&type=courses"><img src="images/plus.png"  class="float-right"></a>
+                            <?php }?>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>

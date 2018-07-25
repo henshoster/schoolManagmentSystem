@@ -6,7 +6,7 @@
         </div>
         <?php
 //Prevents from admin type of 'Sales' to edit courses.
-if (!($this->model->getClassification() < 2) || ($_GET['type'] != 'courses')) {?>
+if (($this->model->getClassification() > 1) || ($_GET['type'] != 'courses')) {?>
             <div class="col lead text-right">
             <a href="<?=str_replace('showdetails', 'editentity', "index.php?{$_SERVER['QUERY_STRING']}")?>" class="btn btn-outline-primary">Edit</a>
         </div>
