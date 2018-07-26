@@ -1,8 +1,13 @@
 <?php
 abstract class DataBase
 {
+    const HOST = 'localhost';
+    const USERNAME = 'root';
+    const PASSWORD = '';
+    const DATABASE_NAME = 'project';
+
     protected $db;
-    public function __construct($host = "localhost", $username = "root", $password = "", $databasename = "project")
+    public function __construct($host = self::HOST, $username = self::USERNAME, $password = self::PASSWORD, $databasename = self::DATABASE_NAME)
     {
         $this->db = new mysqli($host, $username, $password);
         //if not exists, creating new database for The school under the name 'project';
