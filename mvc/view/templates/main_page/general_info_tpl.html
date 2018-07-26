@@ -1,49 +1,81 @@
-<div>
-    <span class="lead">The school:</span>
-    <p>
-        Second project by JOHN BRYCE - Full stack web developer course.
-        <br/> Built by:
-        <strong>Hen Shoster</strong> -
-        <a target="_blank" href="https://github.com/henshoster/schoolManagmentSystem">GitHub repository</a>.
-    </p>
-</div>
-<div>
-    <span class="lead">Introduction:</span>
-    <p>
-        The school is a service that enables the management of students and courses for a school, with different permissions for
-        different types of adminstrators:
-        <ul>
-            <li>Owner - only 1 in the system, Full access to all services.</li>
-            <li>Manager - Full access to all services excluding owner details(view and edit) and self role editing / removing
-                option.
-            </li>
-            <li>Sales - No access to administrators tab, not allowed to create/remove/edit courses.</li>
-        </ul>
-    </p>
+<div class="row">
+    <div class="col-md-6 text-justify">
+        <div>
+            <span class="lead">The school:</span>
+            <p>
+                Second project by JOHN BRYCE - Full stack web developer course.
+                <br/> Built by:
+                <strong>Hen Shoster</strong> -
+                <a target="_blank" href="https://github.com/henshoster/schoolManagmentSystem">GitHub repository</a>.
+            </p>
+        </div>
+        <div>
+            <span class="lead">Introduction:</span>
+            <p>
+                The school is a service that enables the management of students and courses for a school, with different permissions for
+                different types of adminstrators:
+                <ul>
+                    <li>Owner - only 1 in the system, Full access to all services.</li>
+                    <li>Manager - Full access to all services excluding owner details(view and edit) and self role editing /
+                        removing option.
+                    </li>
+                    <li>Sales - No access to administrators tab, not allowed to create/remove/edit courses.</li>
+                </ul>
+            </p>
 
-    <p>Technologies implemented in the project:</p>
-    <ul>
-        <li>HTML + SCSS
+            <p>Technologies implemented in the project:</p>
             <ul>
-                <li>HTML5 Structure</li>
-                <li>Bootstrap design</li>
+                <li>HTML + SCSS
+                    <ul>
+                        <li>HTML5 Structure</li>
+                        <li>Bootstrap design</li>
+                    </ul>
+                </li>
+                <li>JavaScript</li>
+                <li>PHP
+                    <ul>
+                        <li>MVC Structure</li>
+                        <li>Routing</li>
+                        <li>Object Oriented Programming</li>
+                        <li>Password encryption</li>
+                        <li>File upload</li>
+                    </ul>
+                </li>
+                <li>MySQL
+                    <ul>
+                        <li>Design & create schema</li>
+                        <li>Queries</li>
+                    </ul>
+                </li>
             </ul>
-        </li>
-        <li>JavaScript</li>
-        <li>PHP
-            <ul>
-                <li>MVC Structure</li>
-                <li>Routing</li>
-                <li>Object Oriented Programming</li>
-                <li>Password encryption</li>
-                <li>File upload</li>
-            </ul>
-        </li>
-        <li>MySQL
-            <ul>
-                <li>Design & create schema</li>
-                <li>Queries</li>
-            </ul>
-        </li>
-    </ul>
+        </div>
+    </div>
+    <div class="col-md-6 text-justify">
+        <div>
+            <span class="lead">Getting started:</span>
+            <ol>
+                <li>
+                    Required PHP + MYSQL.
+                </li>
+                <li>
+                    Clone or Download the files from
+                    <a target="_blank" href="https://github.com/henshoster/schoolManagmentSystem">here</a>.
+                </li>
+                <li>Open database/database.php file and change 4 CONST variables (lines 4-7): HOST, USERNAME, PASSWORD, DATABASE_NAME
+                    for details of your MYSQL server.
+                    <br>Please make sure your DATABASE_NAME is not already taken.
+                </li>
+                <li>Click Login in the top-right corner or
+                    <a data-toggle="modal" href="#logInModal">here</a>.
+                </li>
+                <li>
+                    <div> First Login as the Owner (Owner details can be modified under the administrators tab): </div>
+                    <div class="border text-center rounded lead"> Email: admin@theschool.com
+                        <br> Password: admin</div>
+                </li>
+                <li>Good luck :-)</li>
+
+            </ol>
+        </div>
+    </div>
 </div>
