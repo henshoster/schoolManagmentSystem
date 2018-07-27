@@ -10,13 +10,6 @@ class dirModel
         if (isset($this->directoryStucture['.git'])) {
             unset($this->directoryStucture['.git']);
         }
-        foreach ($this->directoryStucture['uploads'] as $key => $value) {
-            $imageFileType = strtolower(pathinfo("uploads/$value", PATHINFO_EXTENSION));
-            if ($imageFileType == "jpg" || $imageFileType == "png" || $imageFileType == "jpeg"
-                || $imageFileType == "gif") {
-                unset($this->directoryStucture['uploads'][$key]);
-            }
-        }
     }
     public function getDirectoryStructure()
     {
