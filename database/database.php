@@ -1,10 +1,10 @@
 <?php
 abstract class DataBase
 {
-    const HOST = 'localhost';
-    const USERNAME = 'root';
-    const PASSWORD = '';
-    const DATABASE_NAME = 'project';
+    const HOST = 'den1.mysql6.gear.host';
+    const USERNAME = 'users4';
+    const PASSWORD = 'Qg77M2H~8l_3';
+    const DATABASE_NAME = 'users4';
 
     protected $db;
     public function __construct($host = self::HOST, $username = self::USERNAME, $password = self::PASSWORD, $databasename = self::DATABASE_NAME)
