@@ -15,10 +15,11 @@ if (isset($_POST['reset_owner'])) {
     <h1 class="display-4 m-3 text-center">Welcome to The School</h1>
     <div class="alert alert-danger text-center" role="alert">
         This is a demo site of the service to allow everyone to experiment with the system.
-        We ask you not to upload offensive content to the site.
+        We ask you not to upload offensive content to the site.<br>
+        Owner-Email: admin@theschool.com | Owner-Password: admin
         <hr>
         <form method="post" action="<?=htmlspecialchars($_SERVER['PHP_SELF'])?>">
-        <button name="reset_owner" type="submit" class="btn btn-danger">Please do not edit Owner email or password, in case someone did it anyway Click here for reset</button>
+        Please do not edit Owner email or password, in case someone did it anyway <button name="reset_owner" type="submit" class="btn btn-danger">Click here</button> for reset
         </form>
     </div>
     <div class="dropdown-divider mb-4"></div>
