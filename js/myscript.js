@@ -59,3 +59,15 @@ if (upload != null) {
     }
   });
 }
+
+var trackEvents = document.querySelectorAll("button,a");
+trackEvents.forEach(event => {
+  event.addEventListener("click", function(e) {
+    e = e || window.event;
+    var target = e.target || e.srcElement;
+    var text = target.id || target.textContent || target.innerText;
+    gtag("event", "click", {
+      event_label: text
+    });
+  });
+});
