@@ -6,13 +6,7 @@ class dirModel
 
     public function __construct()
     {
-        //$this->directoryStucture = $this->dirTree('./');
-        if (isset($this->directoryStucture['.git'])) {
-            unset($this->directoryStucture['.git']);
-        }
-        if (isset($this->directoryStucture['.heroku'])) {
-            unset($this->directoryStucture['.heroku']);
-        }
+        $this->directoryStucture = $this->dirTree('./');
     }
     public function getDirectoryStructure()
     {
@@ -31,7 +25,7 @@ class dirModel
         $dirs = array();
         $files = array();
         foreach ($dir as $node) {
-            if ($node->isDir() && !$node->isDot()) {
+            if ($node->isDir() && !$node->isDot() && !(strpos($node->getFilename(), '.') === 0)) {
                 $tree = $this->dirTree($node->getPathname(), $regex, $ignoreEmpty);
                 if (!$ignoreEmpty || count($tree)) {
                     $dirs[$node->getFilename()] = $tree;
