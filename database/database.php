@@ -1,10 +1,10 @@
 <?php
 abstract class DataBase
 {
-    const HOST = 'den1.mysql6.gear.host';
-    const USERNAME = 'users4';
-    const PASSWORD = 'Qg77M2H~8l_3';
-    const DATABASE_NAME = 'users4';
+    const HOST = 'den1.mysql3.gear.host';
+    const USERNAME = 'project0001';
+    const PASSWORD = 'Ev4RgGf-!6vf';
+    const DATABASE_NAME = 'project0001';
 
     protected $db;
     public function __construct($host = self::HOST, $username = self::USERNAME, $password = self::PASSWORD, $databasename = self::DATABASE_NAME)
@@ -21,7 +21,7 @@ abstract class DataBase
             $this->insert('administrators', $ownerColumns, $ownerValues);
             $this->queryTreatment("CREATE TABLE IF NOT EXISTS `courses` ( `id` INT NOT NULL AUTO_INCREMENT , `name` VARCHAR(50) NOT NULL , `description` TEXT NOT NULL , `image_src` TEXT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB");
             $this->queryTreatment("CREATE TABLE IF NOT EXISTS `students` ( `id` INT NOT NULL AUTO_INCREMENT , `name` VARCHAR(50) NOT NULL , `phone` VARCHAR(20) NOT NULL , `email` VARCHAR(50) NOT NULL , `image_src` TEXT NOT NULL , PRIMARY KEY (`id`), UNIQUE (`email`)) ENGINE = InnoDB");
-            $this->queryTreatment("CREATE TABLE `students2courses` ( `students_id` INT NOT NULL , `courses_id` INT NOT NULL ) ENGINE = InnoDB");
+            $this->queryTreatment("CREATE TABLE IF NOT EXISTS `students2courses` ( `students_id` INT NOT NULL , `courses_id` INT NOT NULL ) ENGINE = InnoDB");
             $this->queryTreatment("ALTER TABLE `students2courses` ADD UNIQUE (`students_id`, `courses_id`)");
         }
         if ($this->db->connect_error) {
