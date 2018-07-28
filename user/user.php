@@ -1,6 +1,6 @@
 <?php
 require_once 'database/database.php';
-class User extends DataBase
+abstract class User extends DataBase
 {
     protected $loggedInUser;
     protected $classification;
