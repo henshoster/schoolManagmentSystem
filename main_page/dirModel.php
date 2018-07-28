@@ -10,6 +10,9 @@ class dirModel
         if (isset($this->directoryStucture['.git'])) {
             unset($this->directoryStucture['.git']);
         }
+        if (isset($this->directoryStucture['.heroku'])) {
+            unset($this->directoryStucture['.heroku']);
+        }
     }
     public function getDirectoryStructure()
     {
