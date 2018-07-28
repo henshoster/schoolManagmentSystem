@@ -44,6 +44,19 @@ class Controller
 
     public function saveEntity()
     {
+        if (isset($_POST['email'])) {
+            $getType = "get" . ucfirst($_GET['type']);
+            foreach ($this->model->{$getType}() as $key => $value) {
+                if (($value['email'] == $_POST['email'])) {
+                    if (isset($_GET['id']) && ($value['id'] == $_GET['id'])) {
+                        break;
+                    }
+                    header('Location:' . str_replace('save', $_POST['last_action'], "index.php?{$_SERVER['QUERY_STRING']}&upload_error=Email already exist! Please choose another one"));
+                    die();
+                }
+            }
+        }
+
         if ($_FILES['fileToUpload']["tmp_name"] != null) {
             $uploadResult = $this->fileUpload();
             if ($uploadResult['uploadOk'] == 1) {
@@ -96,7 +109,6 @@ class Controller
         $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
         $uploadResult['uploadOk'] = 1;
         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-        // Check if image file is a actual image or fake image
         $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
         $error = '';
         if ($check !== false) {
@@ -106,25 +118,20 @@ class Controller
             $uploadResult['uploadOk'] = 0;
             return $uploadResult;
         }
-
-        // Check file size
         if ($_FILES["fileToUpload"]["size"] > 500000 || $_FILES["fileToUpload"]["size"] == 0) {
             $uploadResult['error'] = "Sorry, your file is too large max size is:500kb.";
             $uploadResult['uploadOk'] = 0;
             return $uploadResult;
         }
-        // Allow certain file formats
         if (($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
             && $imageFileType != "gif") || $_FILES["fileToUpload"]["type"] == null) {
             $uploadResult['error'] = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
             $uploadResult['uploadOk'] = 0;
             return $uploadResult;
         }
-        // Check if $uploadOk is set to 0 by an error
         if ($uploadResult['uploadOk'] == 0) {
             $uploadResult['error'] = "Sorry, your file was not uploaded.";
             return $uploadResult;
-            // if everything is ok, try to upload file
         } else {
             if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
                 $uploadResult['target_file'] = $target_file;

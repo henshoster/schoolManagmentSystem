@@ -16,6 +16,14 @@ unset($this->administrators[0]['id']);
 foreach ($this->administrators[0] as $key => $value) {
     if ($key == 'image_src') {?>
         <div class="row m-3">
+            <?php if (isset($_GET['upload_error'])) {?>
+            <div class="alert alert-warning alert-dismissible fade show m-3" role="alert">
+                <strong>Error: </strong> <?=$_GET['upload_error']?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <?php }?>
             <div class="col-4">
                 <img id="editDisplayImage" class="mw-100" src='images/user.png'>
                 <input type="hidden" name="<?=$key?>" value='images/user.png'>
@@ -30,14 +38,6 @@ foreach ($this->administrators[0] as $key => $value) {
                         <span aria-hidden="true">&times;</span>
                     </button>
             </div>
-            <?php if (isset($_GET['upload_error'])) {?>
-            <div class="alert alert-warning alert-dismissible fade show m-3" role="alert">
-                <strong>Error: </strong> <?=$_GET['upload_error']?>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <?php }?>
         </div>
         <?php } elseif ($key == 'role') {?>
         <div class="form-group col-8 mx-auto">
