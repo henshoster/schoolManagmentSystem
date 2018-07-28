@@ -5,14 +5,22 @@ class Controller
     protected $model;
     const DB_TABLE = 'administrators';
 
-    public function getName()
-    {
-        return get_class($this);
-    }
-
     public function __construct(Model $model)
     {
         $this->model = $model;
+    }
+
+    public function checkInput($data)
+    {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
+
+    public function getName()
+    {
+        return get_class($this);
     }
 
     public function logIn()
@@ -44,6 +52,10 @@ class Controller
 
     public function saveEntity()
     {
+        foreach ($_POST as $key => $value) {
+            $_POST[$key] = $this->checkInput($value);
+        }
+
         if (isset($_POST['email'])) {
             $getType = "get" . ucfirst($_GET['type']);
             foreach ($this->model->{$getType}() as $key => $value) {
