@@ -6,7 +6,7 @@ class dirModel
 
     public function __construct()
     {
-        $this->directoryStucture = $this->dirTree('./');
+        //$this->directoryStucture = $this->dirTree('./');
         if (isset($this->directoryStucture['.git'])) {
             unset($this->directoryStucture['.git']);
         }
