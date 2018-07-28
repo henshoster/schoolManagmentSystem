@@ -11,7 +11,10 @@ $dirTree = new dirView(new dirModel);
             <?php include 'main_page/general_info_tpl.html';?>
         </div>
         <div class="col-md-4">
-            <p class="lead">File structure view:</h4>
+        <p>
+            <span class="lead">File structure view:</span> <br>
+            <small>Contains all the folders and files from the root folder, excluding folders starting with '.' (dot)</small>
+        </p>
             <ul>
                 <li><span class="text-success">The School</span>
                     <ul>
