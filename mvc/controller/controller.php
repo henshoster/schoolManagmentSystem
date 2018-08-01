@@ -59,7 +59,7 @@ class Controller
         if (isset($_POST['email'])) {
             $getType = "get" . ucfirst($_GET['type']);
             foreach ($this->model->{$getType}() as $key => $value) {
-                if (($value['email'] == $_POST['email'])) {
+                if (strtolower($value['email']) == strtolower($_POST['email'])) {
                     if (isset($_GET['id']) && ($value['id'] == $_GET['id'])) {
                         break;
                     }
