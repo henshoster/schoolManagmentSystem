@@ -43,8 +43,8 @@
                         <td>
                             <a href="index.php?route=school&action=showdetails&type=students&id=<?=$student['id']?>">
                             <div class="navbar-text align-middle">
-                                <span class="lead"><?=$student['name']?></span>
-                                <span class="d-block"><?=$student['phone']?></span>
+                                <span class="lead d-block truncate"><?=$student['name']?></span>
+                                <span class="d-block truncate"><?=$student['phone']?></span>
                             </div>
                             <div class="navbar-text align-middle float-right">
                                 <img src="<?=$student['image_src']?>">
