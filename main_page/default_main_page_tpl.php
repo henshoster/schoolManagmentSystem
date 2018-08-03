@@ -16,6 +16,7 @@ if (isset($_POST['reset_owner'])) {
     <div class="alert alert-danger text-center" role="alert">
         This is a demo site of the service to allow everyone to experiment with the system.
         We ask you not to upload offensive content to the site.<br>
+        <u>Note:</u> The application is stored on Heroku servers, the Heroku filesystem is ephemeral - that means that any fileupload will be lost upon dyno restart.<br>
         <span class="lead">Owner-Email: admin@theschool.com | Owner-Password: admin</span>
         <hr>
         <form method="post" action="<?=htmlspecialchars($_SERVER['PHP_SELF'])?>">
